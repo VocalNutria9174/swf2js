@@ -67,9 +67,10 @@ version that supports [Actionscript 3](https://en.wikipedia.org/wiki/ActionScrip
   bgcolor     |Set background color |                                                       
 
 Example usage of options.
-```
-   swf2js.load('tiger.swf', {tagId: "swf_2", width: "320", height: "320", callback : informMe, bgcolor: "black"});
-```        
+
+    function informMe(arg) {  alert("informMe : swf-file loaded"); }
+    
+    swf2js.load('tiger.swf', {tagId: "swf_instance", width: "320", height: "320", callback : informMe, bgcolor: "black"});
 
 See [example\_options.html](https://music4classicalguitar.github.io/swf2js/example_options.html)
 
