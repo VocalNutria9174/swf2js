@@ -119,6 +119,7 @@ if (!("swf2js" in window)) {
 		var SWF_CompilationDate = "";
 		var SWF_TODO = "";
 
+		/*
 		var showResult = function(text) {
 			var progressDiv = document.getElementById("progressDiv");
 			if (!progressDiv) {
@@ -128,6 +129,8 @@ if (!("swf2js" in window)) {
 			}
 			progressDiv.innerHtml=text;
 		};
+		*/
+		var showResult = window.console.log;
 		var showWarning = window.console.warn;
 		var showError = window.console.error;
 
@@ -200,7 +203,7 @@ if (!("swf2js" in window)) {
 			}
 		}	
 
-		var userLang = window.sessionStorage["userLang"] ? window.sessionStorage["userLang"] : (navigator.language || navigator.userLanguage).split("-")[0];
+		var userLang = (navigator.language || navigator.userLanguage).split("-")[0];
 
 		var autoPlayAllowed = false;
 		var autoPlayUnlocked = false;
@@ -26349,7 +26352,7 @@ if (!("swf2js" in window)) {
 				"text": "Autoplay nicht erlaubt, drücken Sie diese Taste, um die Animation zu starten"
 			},
 			{
-				"lang": "dk",
+				"lang": "da",
 				"text": "Autoplay ikke tilladt, tryk på denne knap for at starte animationen"
 			}
 		];
@@ -27008,7 +27011,7 @@ if (!("swf2js" in window)) {
 					_this.loadStatus++;
 					_this.loaded();
 					_this.prepareStartStopAnimation();
-					showResult("SWF-file '" + _this.url + "' Signature " + _this.signature + " Version " + _this.version + "\nfileLength " + _this.fileLength + " frameSize twips(x,y) [" + _this.bounds.xMin + "-" + _this.bounds.xMax + "," + _this.bounds.yMin + "-" + _this.bounds.yMax + "]\nframesPerSecond " + (1000 / _this.getFrameRate()) + " frameTime " + _this.getFrameRate() + " frameCount " + _this.frameCount + " duration " + _this.frameCount * _this.getFrameRate() / 1000 + "\nlang " + userLang + "\nautoplay audio " + autoPlayAudioAllowed + "\nsounds " + soundsUseType + " used " + soundsUsedType + " " + soundCount + " \nsoundstreams " + soundStreamsUseType + " used " + soundStreamsUsedType + " " + soundStreamCount + "\nautoplay video " + autoPlayVideoAllowed + "\nvideoCount " + videoCount + "\nquality " + quality + "\ngetTimeStamp " + getTimeStamp + "\nrequestAnimationFrame " + requestAnimationFrame + "\nua " + ua);
+					showResult("SWF-file '" + _this.url + "' Signature " + _this.signature + " Version " + _this.version + "\nfileLength " + _this.fileLength + " frameSize twips(x,y) [" + _this.bounds.xMin + "-" + _this.bounds.xMax + "," + _this.bounds.yMin + "-" + _this.bounds.yMax + "]\nframesPerSecond " + (1000 / _this.getFrameRate()) + " frameTime " + _this.getFrameRate() + " frameCount " + _this.frameCount + " duration " + _this.frameCount * _this.getFrameRate() / 1000 + "\nlang " + (navigator.language || navigator.userLanguage) + "\nautoplay audio " + autoPlayAudioAllowed + "\nsounds " + soundsUseType + " used " + soundsUsedType + " " + soundCount + " \nsoundstreams " + soundStreamsUseType + " used " + soundStreamsUsedType + " " + soundStreamCount + "\nautoplay video " + autoPlayVideoAllowed + "\nvideoCount " + videoCount + "\nquality " + quality + "\ngetTimeStamp " + getTimeStamp + "\nrequestAnimationFrame " + requestAnimationFrame + "\nua " + ua);
 					if (autoPlayAllowed) _this.play();
 					break;
 			}
