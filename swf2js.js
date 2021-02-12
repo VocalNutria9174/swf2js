@@ -203,8 +203,6 @@ if (!("swf2js" in window)) {
 			}
 		}	
 
-		var userLang = (navigator.language || navigator.userLanguage).split("-")[0];
-
 		var autoPlayAllowed = false;
 		var autoPlayUnlocked = false;
 
@@ -26335,51 +26333,24 @@ if (!("swf2js" in window)) {
 			return this._global;
 		};
 
-		var buttontext = [{
-				"lang": "nl",
-				"text": "Autoplay niet toegestaan, druk op deze knop om de animatie te starten"
-			},
-			{
-				"lang": "en",
-				"text": "Autoplay not allowed, press this button to start animation"
-			},
-			{
-				"lang": "fr",
-				"text": "Lecture automatique non autorisée, appuyez sur ce bouton pour démarrer l'animation"
-			},
-			{
-				"lang": "de",
-				"text": "Autoplay nicht erlaubt, drücken Sie diese Taste, um die Animation zu starten"
-			},
-			{
-				"lang": "da",
-				"text": "Autoplay ikke tilladt, tryk på denne knap for at starte animationen"
-			}
-		];
-		var langIndex = 1;
-		for (var i = 0; i < buttontext.length; i++)
-			if (userLang == buttontext[i]["lang"]) {
-				langIndex = i;
-				break;
-			}
-
 		Stage.prototype.prepareStartStopAnimation = function() {
 			var _this = this;
-			var control;
+			var control, image;
 			if (!autoPlayAllowed) {
 				control = document.createElement("input");
 				control.type = "button";
-				control.value = buttontext[langIndex]["text"];
 				control.id = "control";
-				control.style["z-index"] = "2";
-				control.style.position = "absolute";
-				control.style.top = "10%";
-				control.style.left = "10%";
-				control.style["background-color"] = "red";
-				control.style["font-size"] = "16px";
+				control.alt = "Play";
+				control.value = "Play";				
+				var svg='data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNTYiIGhlaWdodD0iMjU2IiB2aWV3Qm94PSItMTI4IC0xMjggMjU2IDI1NiI+PGcgdHJhbnNmb3JtPSJtYXRyaXgoMi45NTU0MDM0LDAsMCwyLjk2ODA1MzUsLTEuMjM3MTg1OSwwLjY5NDU5OTMpIiBzdHlsZT0ic3Ryb2tlLXdpZHRoOjAuMDMzNzY0MTQ7c3Ryb2tlLW1pdGVybGltaXQ6NDtzdHJva2UtZGFzaGFycmF5Om5vbmUiPjxwYXRoIHN0eWxlPSJvcGFjaXR5OjE7ZmlsbDojNjU2NTY1O2ZpbGwtcnVsZTpub256ZXJvO3N0cm9rZTojNjU2NTY1O3N0cm9rZS13aWR0aDowLjAzMzc2NDE0O3N0cm9rZS1saW5lY2FwOmJ1dHQ7c3Ryb2tlLWxpbmVqb2luOm1pdGVyO3N0cm9rZS1taXRlcmxpbWl0OjQ7c3Ryb2tlLWRhc2hhcnJheTpub25lO3N0cm9rZS1kYXNob2Zmc2V0OjAiIHZlY3Rvci1lZmZlY3Q9Im5vbi1zY2FsaW5nLXN0cm9rZSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTUwLC01MCkiIGQ9Ik0gNTAsOTIuODc1IEMgMjYuMzU4LDkyLjg3NSA3LjEyNSw3My42NDIgNy4xMjUsNTAgNy4xMjUsMjYuMzU4IDI2LjM1OCw3LjEyNSA1MCw3LjEyNSA3My42NDIsNy4xMjUgOTIuODc1LDI2LjM1OCA5Mi44NzUsNTAgOTIuODc1LDczLjY0MiA3My42NDIsOTIuODc1IDUwLDkyLjg3NSBaIE0gNTAsOS4xMjUgQyAyNy40NjEsOS4xMjUgOS4xMjUsMjcuNDYxIDkuMTI1LDUwIDkuMTI1LDcyLjUzOCAyNy40NjEsOTAuODc1IDUwLDkwLjg3NSA3Mi41MzgsOTAuODc1IDkwLjg3NSw3Mi41MzggOTAuODc1LDUwIDkwLjg3NSwyNy40NjEgNzIuNTM4LDkuMTI1IDUwLDkuMTI1IFoiIC8+PC9nPjxnIHRyYW5zZm9ybT0ibWF0cml4KDMuNDg5OTk5NiwwLDAsMy40ODk5OTk1LC0wLjc0OTk5NjU1LDAuNzUwMDAwMDUpIiBpZD0iODdlNjc4ZjEtOWQzYi00NjRiLTlmZmUtNDYzYTNkMjcwMGFlIiBzdHlsZT0iZmlsbDojOTY5Njk2O2ZpbGwtb3BhY2l0eToxIj48Y2lyY2xlIHN0eWxlPSJvcGFjaXR5OjE7ZmlsbDojOTY5Njk2O2ZpbGwtb3BhY2l0eToxO2ZpbGwtcnVsZTpub256ZXJvO3N0cm9rZTojMDAwMDAwO3N0cm9rZS13aWR0aDowO3N0cm9rZS1saW5lY2FwOmJ1dHQ7c3Ryb2tlLWxpbmVqb2luOm1pdGVyO3N0cm9rZS1taXRlcmxpbWl0OjQ7c3Ryb2tlLWRhc2hhcnJheTpub25lO3N0cm9rZS1kYXNob2Zmc2V0OjA7c3Ryb2tlLW9wYWNpdHk6MSIgdmVjdG9yLWVmZmVjdD0ibm9uLXNjYWxpbmctc3Ryb2tlIiBjeD0iMCIgY3k9IjAiIHI9IjM1IiAvPjwvZz48ZyB0cmFuc2Zvcm09Im1hdHJpeCgwLDEuODI4MzIxLC0xLjgyMDUyODUsMCwyNC4yMjc0OTEsLTIuMDEyNTY0MykiIGlkPSJmNWI3NTcyMy03ZDdhLTQzOWYtOTlhNC1lNTQ2MmU5YjZjOWIiPjxwb2x5Z29uIHN0eWxlPSJvcGFjaXR5OjE7ZmlsbDojNjU2NTY1O2ZpbGwtcnVsZTpub256ZXJvO3N0cm9rZTojMDAwMDAwO3N0cm9rZS13aWR0aDowO3N0cm9rZS1saW5lY2FwOmJ1dHQ7c3Ryb2tlLWxpbmVqb2luOm1pdGVyO3N0cm9rZS1taXRlcmxpbWl0OjQ7c3Ryb2tlLWRhc2hhcnJheTpub25lO3N0cm9rZS1kYXNob2Zmc2V0OjAiIHZlY3Rvci1lZmZlY3Q9Im5vbi1zY2FsaW5nLXN0cm9rZSIgcG9pbnRzPSIzNy40MywzMi40MSAtMzcuNDMsMzIuNDEgMCwtMzIuNDEiLz48L2c+PC9zdmc+';
 				var d = document.getElementsByTagName("div")[0];
+				var s = window.getComputedStyle(d);
+				var top = Math.floor((parseFloat(s.height)-256)/2), left = Math.floor((parseFloat(s.width)-256)/2);
+				control.style="position: absolute; top: "+top+"px; left: "+left+"px; background-image: url("+svg+"); background-repeat: no-repeat; background-position: left;"+
+    				"padding-left: 256px; height: 256px; border: none; background-color: transparent; color:transparent; z-index: 256;";
 				d.appendChild(control);
 				control.onclick = function() {
+					console.log("playbutton play");
 					control.parentNode.removeChild(control);
 					_this.play();
 				}
@@ -26557,7 +26528,7 @@ if (!("swf2js" in window)) {
 						nvol = -1,
 						pstereo = -1,
 						nstereo = -1;
-					for (i = 0; i < soundEnvelope.length; i++) {
+					for (var i = 0; i < soundEnvelope.length; i++) {
 						if (soundEnvelope[i].Position > cpos) {
 							npos = soundEnvelope[i].Position;
 							nvol = (soundEnvelope[i].LeftLevel + soundEnvelope[i].RightLevel) / 2;
